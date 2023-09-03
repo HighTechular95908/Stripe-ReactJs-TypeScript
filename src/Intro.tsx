@@ -1,15 +1,12 @@
 import React from 'react';
+import Header from './Header';
 import './App.css';
 
 function Intro() {
   return (
     <>
-      <header style={{ padding: 0, position: 'relative', backgroundColor: 'white', width: '100%' }}>
-        <img src="2.png" alt="back" style={{ width: '100%' }} />
-        <img alt="Talysis Logo" src="logo1.png" style={{ width: '20vw', position: 'absolute', top: '20px', left: '20px' }} />
-        <h1 className="" style={{ position: 'absolute', top: '6vw', color: 'white', right: '5vw', textShadow: '2px 2px 4px #000000', fontSize: '3.5vw' }}>Where there's <span style={{ color: '#A0522D' }}>Muck</span>, there's <span style={{ color: '#FFD700' }}>Money!</span></h1>
-        <h3 style={{ position: 'absolute', top: '12.5vw', right: '10vw', textShadow: '2px 2px 4px #000000', fontSize: '2.5vw', color: '#DAA520' }}>Talysis Fundraising Event - Win <span style={{ fontSize: '2.6vw', color: '#FFD700', textDecoration: 'underline' }}>£2,000</span></h3>
-      </header>
+      <Header />
+      
       <h2 id="anounce" style={{ margin: '0 10%', zIndex: 2, position: 'relative', textAlign: 'center', fontSize: '2.5rem', color: 'brown', initialLetter: 2 }}>
         Talysis have set themselves a challenging target of raising £15,000 for good causes during 2023, their 15th anniversary year and are giving you the opportunity to win £2,000 in the process!
       </h2>
@@ -58,7 +55,7 @@ function Intro() {
       </section>
       <section className="" style={{ width: '80%', margin: '0 auto', display: 'flex', flexWrap: 'wrap' }}>
         <div className="contestant">
-          <img className="contestant-image" src="charlie.jpg" style={{ height: '600px' }} />
+          <img className="contestant-image" alt='charlie' src="charlie.jpg" style={{ height: '600px' }} />
           <div id="info1" className="contestant-info" style={{ display: 'block1', textAlign: 'center' }}>
             <h3>Charlie:</h3>
             <p>Breed: Working Cocker Spaniel</p>
@@ -67,7 +64,7 @@ function Intro() {
           </div>
         </div>
         <div className="contestant">
-          <img className="contestant-image" src="boo.jpg" height="600px" />
+          <img className="contestant-image" alt='boo' src="boo.jpg" height="600px" />
           <div id="info2" className="contestant-info" style={{ display: 'block1' }}>
             <h3>Boo</h3>
             <p>Breed: Maltes-shitz-poo</p>
@@ -76,7 +73,7 @@ function Intro() {
           </div>
         </div>
         <div className="contestant">
-          <img className="contestant-image" src="molly.jpg" style={{ height: '600px' }} />
+          <img className="contestant-image" alt='molly' src="molly.jpg" style={{ height: '600px' }} />
           <div id="info4" className="contestant-info" style={{ display: 'block1' }}>
             <h3>Molly</h3>
             <p>Breed: Labrodor</p>
@@ -85,7 +82,7 @@ function Intro() {
           </div>
         </div>
         <div className="contestant2" style={{ display: 'inline-block', width: '51%' }}>
-          <img className="contestant-image" src="betty.jpg" style={{ height: '600px' }} />
+          <img className="contestant-image" alt='betty' src="betty.jpg" style={{ height: '600px' }} />
           <div id="info3" className="contestant-info" style={{ display: 'block1' }}>
             <h3>Betty</h3>
             <p>Breed: Labrador</p>
@@ -94,7 +91,7 @@ function Intro() {
           </div>
         </div>
         <div className="contestant2" style={{ display: 'inline-block', width: '40%' }}>
-          <img className="contestant-image" src="gus-poppy.jpg" style={{ height: '600px' }} />
+          <img className="contestant-image" alt='gus-poppy' src="gus-poppy.jpg" style={{ height: '600px' }} />
           <div id="info5" className="contestant-info" style={{ display: 'block1' }}>
             <div style={{ float: 'left', width: '50%' }}>
               <h3>Gus</h3>
@@ -121,7 +118,7 @@ function Intro() {
           </div>
           <div style={{ textAlign: 'center', margin: '50px' }}>
             <h2 style={{ textAlign: 'center', fontSize: '50px', color: '#DAA520' }}>Contact us</h2>
-            <a href="https://www.talysis.co.uk" target="_blank" rel="noopener noreferrer"><img src="logo2.png" width="200" height="200" alt="Charity 2" /></a>
+            <a href="https://www.talysis.co.uk" target="_blank" rel="noopener noreferrer"><img src="logo2.png" width="200" height="200" alt="logo 2" /></a>
           </div>
         </div>
       </section>

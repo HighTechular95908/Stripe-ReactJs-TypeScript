@@ -6,7 +6,6 @@ body {
   
 }
 
-
 .contestant {
   display:inline-block; 
   border-radius: 10px; 
@@ -100,4 +99,92 @@ body {
 
 #anounce::first-letter{
   initial-letter: 3;
+}
+
+/****************************************/
+/********        For Buy        *********/
+/****************************************/
+
+.block {
+  width: calc(100% / 105);
+  height: calc(100vh / 65); /* Adjusted height to fit the screen */
+  border: 0.2px dotted #ddd;
+  background-color: transparent;
+  margin: 0; /* Removed margin */
+  border-radius: 1px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.block:hover {
+  background-color: #006400; /* Darker Green */
+}
+
+.selected {
+  background-color: #B22222; /* Red */
+  color: #FFFFFF; /* White */
+}
+
+.sold {
+  background-color: #696969; /* Grey */
+  cursor: not-allowed;
+}
+
+#checkout-btn {
+  margin: 20px auto;
+  padding: 20px 30px;
+  background: linear-gradient(45deg, #9370DB, #1E90FF); /* Black Gradient */
+  color: #FFFFFF; /* White */
+  text-align: center;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 8px;
+  border: none;
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+
+}
+
+#checkout-btn:hover {
+  background: linear-gradient(45deg, #1E90FF, #9370DB); /* Reverse Black Gradient */
+}
+
+#land-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 67.5%;
+  overflow-y: hidden;
+  margin-top: 6.5%;
+  margin-bottom: 50%;
+  margin-right: 2.5%;
+  margin-left: 6.8%;
+  
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#land {
+  background-image: url('../public/back2.JPG');
+  background-size: cover;
+  width: 1200px;
+  height: 800px;
+  margin: 0 auto;
+  overflow-y: hidden;
+  /* overflow-x: auto; */
+}
+
+#summary {
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  padding: 20px;
+  font-size: 30px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+#available,
+#reserved,
+#sold {
+  color: #000000;
 }
