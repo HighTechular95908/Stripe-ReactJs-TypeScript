@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import Header from "./Header";
+
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+const API_URL = "http://localhost:4242/";
+
 
 const Buy = () => {
     const [selectedBlocks, setSelectedBlocks] = useState(0);
     const [availableBlocks, setAvailableBlocks] = useState(5775);
     const [reservedBlocks, setReservedBlocks] = useState(0);
     const [soldBlocks, setSoldBlocks] = useState(0);
-    
-    const blocks = [];
 
+    const blocks = [];
     for (let i = 0; i < 55 * 105; i++) { // Total blocks: 5775
-        blocks.push(<div className="block" key={i + 1} />);
+        blocks.push(<div className="block" id={String(i + 1)} />);
     }
 
     useEffect(() => {
@@ -44,7 +48,52 @@ const Buy = () => {
         setSoldBlocks(soldBlocks1);
     }
 
-    console.log('hi', selectedBlocks);
+    const Message = ( message:any ) => (
+        <section>
+            <p>{message}</p>
+        </section>
+    );
+
+    const handleCheckout = async () => {
+        const blockIDs = []
+        const selectedDivs = document.querySelectorAll('.block.selected');
+
+        for (let i = 0; i < selectedDivs.length; i++) {
+            const divId = selectedDivs[i].id;
+            blockIDs.push(divId);
+            // console.log(divId);
+        }
+        // Get Stripe.js instance
+        const stripe = await stripePromise;
+        // Call your backend to create the Checkout Session
+        const response = await fetch(API_URL+"create-checkout-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ blocks:blockIDs }),
+        });
+
+        const session = await response.json();
+        // When the customer clicks on the button, redirect them to Checkout.
+        const result = await stripe?.redirectToCheckout({
+            sessionId: session.id,
+        }).then((res) => console.log('res', res))
+        .then((error) => console.log('error', error));
+        // if (result?.error) {
+        //     // If `redirectToCheckout` fails due to a browser or network
+        //     // error, display the localized error message to your customer
+        //     // using `result.error.message`.
+        // }
+        // else{
+        //     console.log('sessionId', session);
+        // }
+    };
+
+    // const selectedDivs = document.querySelectorAll('.selected');
+
+    // for (let i = 0; i < selectedDivs.length; i++) {
+    //     const divId = selectedDivs[i].id;
+    //     console.log(divId);
+    // }
 
     return (
         <>
@@ -61,7 +110,7 @@ const Buy = () => {
             <br />
             {
                 selectedBlocks > 0 &&
-                    <button id="checkout-btn" onClick={() => updateSummary()}>Proceed to Checkout - £{selectedBlocks*2}</button>
+                    <button id="checkout-btn" onClick={() => handleCheckout()}>Proceed to Checkout - £{selectedBlocks*2}</button>
             }
             
             <div style={{ overflowX: 'auto' }}>

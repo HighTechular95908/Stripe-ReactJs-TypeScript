@@ -5,19 +5,19 @@ import Buy from './Buy';
 
 const MainRoutes = () => {
     const mainRoutes = [
-     {
-      path: '/',
-      children: [
-        {
-          path: '/',
-          element: <Intro />,
-        },
-        {
-          path: '/buy',
-          element: <Buy />,
-        }
-      ]
-     }
+      {
+        path: '/',
+        children: [
+          {
+            path: '/',
+            element: <Intro />,
+          },
+          {
+            path: '/buy',
+            element: <Buy />,
+          }
+        ]
+      }
     ];
 
     return (useRoutes(mainRoutes));
