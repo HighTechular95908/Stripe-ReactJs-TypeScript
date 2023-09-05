@@ -149,6 +149,26 @@ body {
   background: linear-gradient(45deg, #1E90FF, #9370DB); /* Reverse Black Gradient */
 }
 
+#download-btn {
+  position: fixed;
+  background: linear-gradient(45deg, #9370DB, #1E90FF); /* Black Gradient */
+  color: #FFFFFF; /* White */
+  text-align: center;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 8px;
+  border: none;
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  right: 30px;
+  bottom: 30px;
+  padding: 20px 20px;
+}
+
+#download-btn:hover {
+  background: linear-gradient(45deg, #1E90FF, #9370DB); /* Reverse Black Gradient */
+}
+
 #land-grid {
   display: flex;
   flex-wrap: wrap;
