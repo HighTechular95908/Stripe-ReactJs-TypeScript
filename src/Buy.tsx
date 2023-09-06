@@ -2,9 +2,15 @@ import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import * as XLSX from 'xlsx';
 import Header from "./Header";
-const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
+
 // const stripePromise = loadStripe("pk_test_51Nmp0aDBoEL4nVgEnrD0xLQwFXk9aT9KGYs9OryMQ2xlzkH5iSn5TW0IQzvL6bfGw6yhnPZh6fHYI0t77wvt2jiy003GvCPNxm");
-// const stripePromise = loadStripe("pk_test_GT6R5LabiNRdqHGN4Xu7Xwmw");
+// const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
+
+//Test Mode
+const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
+
+//Real Use
+// const stripePromise = loadStripe("pk_live_51NlUc8H8UpWaisRstn5EhQBorzvy4vIqWC4OGdWGYki2Chv3uYERgc6Yogx4D7bcTzJaZqspjgpcu5xSYM5POFpF003miUCpzF");
 const API_URL = "http://localhost:4242/";
 // const API_URL = "http://talysis15.co.uk:4242/";
 
@@ -116,25 +122,25 @@ const Buy = () => {
         // }
     };
 
-    // const handleDownload = async () => {
-    //     let persons = []
-    //     let k = 0;
-    //     for(let i = historyData?.length-1; i>=0; i--){
-    //         let person = "";
-    //         k++;
-    //         const id = k;
-    //         const blocks = historyData[i]['blocks'];
-    //         const date = historyData[i]['date'];
-    //         person = '{"id":"'+id+'", "blocks":"'+blocks+'", "date":"'+date+'"}';
-    //         persons.push(JSON.parse(person));
-    //     }
-    //     const worksheet = XLSX.utils.json_to_sheet(JSON.parse(JSON.stringify(persons)));
-    //     const workbook = XLSX.utils.book_new();
-    //     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    //     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-    //     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-    //     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    // }
+    const handleDownload = async () => {
+        let persons = []
+        let k = 0;
+        for(let i = historyData?.length-1; i>=0; i--){
+            let person = "";
+            k++;
+            const id = k;
+            const blocks = historyData[i]['blocks'];
+            const date = historyData[i]['date'];
+            person = '{"id":"'+id+'", "blocks":"'+blocks+'", "date":"'+date+'"}';
+            persons.push(JSON.parse(person));
+        }
+        const worksheet = XLSX.utils.json_to_sheet(JSON.parse(JSON.stringify(persons)));
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+        //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+        //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+        XLSX.writeFile(workbook, "DataSheet.xlsx");
+    }
 
     // const selectedDivs = document.querySelectorAll('.selected');
 
@@ -167,7 +173,7 @@ const Buy = () => {
                 </div>
             </div>
 
-            {/* {
+            {
                 soldBlocks > 0 &&
                     <button id="download-btn" title="Export data related to sold blocks" onClick={() => handleDownload()}>
                         <svg viewBox="64 64 896 896" focusable="false" data-icon="download" width="40px" height="40px" fill="currentColor" aria-hidden="true">
@@ -175,7 +181,7 @@ const Buy = () => {
                             </path>
                         </svg>
                     </button>
-            }    */}
+            }   
         </>
     );
 }

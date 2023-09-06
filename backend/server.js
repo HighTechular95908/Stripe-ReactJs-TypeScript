@@ -1,6 +1,12 @@
-const stripe = require('stripe')('sk_test_51NlUc8H8UpWaisRsh6LOhRnXRykn8FNZO0CLYoLRlOWWBTViBq0buaxCpyB5iR3WHSO7uWUGcmxOEg6c303sIA4G00qVkx4wRP');
-// const stripe = require('stripe')('sk_test_1xdtxPRr3dEaOBrLBi8c0OVh');
+// const stripe = require('stripe')('sk_test_51NlUc8H8UpWaisRsh6LOhRnXRykn8FNZO0CLYoLRlOWWBTViBq0buaxCpyB5iR3WHSO7uWUGcmxOEg6c303sIA4G00qVkx4wRP');
 // const stripe = require('stripe')('sk_test_51Nmp0aDBoEL4nVgEyYWg4Hf1QPzcm4EmME8hO10R1UV5q7Hycc67W1VkbTppXTDJ5EMLDPI1K08IMxWVfPpVgM4L00e5Ra0Iuk');
+
+// Test mode
+const stripe = require('stripe')('sk_test_51NlUc8H8UpWaisRsh6LOhRnXRykn8FNZO0CLYoLRlOWWBTViBq0buaxCpyB5iR3WHSO7uWUGcmxOEg6c303sIA4G00qVkx4wRP');
+
+// Real Use
+// const stripe = require('stripe')('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');
+
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const express = require('express');
@@ -14,9 +20,15 @@ const Block = require('./models/Blocks');
 const app = express();
 const YOUR_DOMAIN = 'http://localhost:3000/buy';
 // const YOUR_DOMAIN = 'http://talysis15.co.uk/buy';
-const endpointSecret = 'whsec_...';
+
 // const priceID = 'price_1Nmp4hDBoEL4nVgEsJyZtbEk';
+// const priceID = 'price_1Nmi9FH8UpWaisRscayjkLmi';
+
+//Test Mode
 const priceID = 'price_1Nmi9FH8UpWaisRscayjkLmi';
+
+// Real Use
+// const priceID = 'price_1NnQz7H8UpWaisRsFFvk6vdj';
 
 connectDB();
 
@@ -28,20 +40,8 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false }));
 app.use(bodyParser.json({limit: '50mb'}));
 
-const fulfillOrder = (session) => {
-    // TODO: fill me in
-    console.log("Fulfilling order", session);
-}
-  
-const createOrder = (session) => {
-    // TODO: fill me in
-    console.log("Creating order", session);
-}
+var blockIDs;
 
-const emailCustomerAboutFailedPayment = (session) => {
-    // TODO: fill me in
-    console.log("Emailing customer", session);
-}
 
 const handleDownload = async (historyData) => {
     let persons = []
@@ -98,54 +98,8 @@ app.post('/create-checkout-session', async (req, res) => {
     
     const sessionId = session.id;
     if(sessionId){
-    //     const customers = await stripe.customers.list({});
-    //     console.log('cs', customers);
-    //     customers.data.forEach(customer => {
-    //         console.log(customer.email);
-    //     });
-    //     // retrieveSession(session.id);
-        const email = session.customer_email;
-        const blocks = req.body.blocks;
-    //     // console.log('blocks', blocks);
-    //     // console.log('res', blocks[2]);
-
-    //     // Add email and blocks to Database
-        try {
-            const newBlocks = new Block({
-                email: email,
-                blocks: blocks,
-            });
         
-            await newBlocks.save();
-        
-            // res.json(newBlocks);
-        } catch (err) {
-            console.error(err.message);
-            // res.status(500).send("Server Error");
-        }
-
-        try {
-            const persons = await Block.find({}, 'email blocks date').sort({ date: -1 });
-            // console.log('blocks', persons);
-            handleDownload(persons);
-            // res.json(blocks);
-        
-        } catch (err) {
-            console.error(err.message);
-            // res.status(500).send("Server Error");
-        }
-
-    //     stripe.charges.list({ limit: 10 }, (err, charges) => {
-    //         if (err) {
-    //             console.error('Error retrieving charges:', err);
-    //             return;
-    //         }
-          
-    //         charges.data.forEach(charge => {
-    //             const customerEmail = charge.receipt_email;
-    //             console.log('Customer Email:', customerEmail);
-    //         });
-    //     });
+        blockIDs = req.body.blocks;
 
         res.send({id:session.id});
     }
@@ -158,62 +112,45 @@ app.post('/create-checkout-session', async (req, res) => {
     
 });
 
-app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
+app.post('/webhook', express.raw({type: 'application/json'}), async (request, response) => {
     const payload = request.body;
-    const sig = request.headers['stripe-signature'];
-  
-    let event;
-  
-    try {
-        event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-    } catch (err) {
-        response.status(400).send(`Webhook Error: ${err.message}`);
-        return;
-    }
-  
-    // Handle the event
-    switch (event.type) {
-        case 'checkout.session.completed': {
-            const session = event.data.object;
-            // Save an order in your database, marked as 'awaiting payment'
-            createOrder(session);
-        
-            // Check if the order is paid (for example, from a card payment)
-            //
-            // A delayed notification payment will have an `unpaid` status, as
-            // you're still waiting for funds to be transferred from the customer's
-            // account.
-            if (session.payment_status === 'paid') {
-                fulfillOrder(session);
+    console.log(payload);
+    if (payload.type === 'checkout.session.completed') {
+        const session = payload.data.object;
+        // Check if the checkout session is successful
+        if (session.payment_status === 'paid') {
+          // Handle successful checkout session
+            console.log('Checkout session successful');
+            const email = session.customer_details.email;
+            try {
+                const newBlocks = new Block({
+                    email: email,
+                    blocks: blockIDs,
+                });
+            
+                await newBlocks.save();
+            
+                // res.json(newBlocks);
+            } catch (err) {
+                console.error(err.message);
+                // res.status(500).send("Server Error");
             }
-        
-            break;
-        }
     
-        case 'checkout.session.async_payment_succeeded': {
-            const session = event.data.object;
-        
-            // Fulfill the purchase...
-            fulfillOrder(session);
-        
-            break;
+            try {
+                const persons = await Block.find({}, 'email blocks date').sort({ date: -1 });
+                // console.log('blocks', persons);
+                handleDownload(persons);
+                // res.json(blocks);
+            
+            } catch (err) {
+                console.error(err.message);
+                // res.status(500).send("Server Error");
+            }
         }
-    
-        case 'checkout.session.async_payment_failed': {
-            const session = event.data.object;
-        
-            // Send an email to the customer asking them to retry their order
-            emailCustomerAboutFailedPayment(session);
-        
-            break;
-        }
-
-        default:
-            console.log(`Unhandled event type ${event.type}`);
     }
   
     // Return a 200 response to acknowledge receipt of the event
-    response.send();
+    return response.status(200).json({msg:"handle webhook success"});
 });
 
 app.listen(4242, () => console.log('Running on port 4242'));
