@@ -1,8 +1,7 @@
-// const stripe = require('stripe')('sk_test_51NlUc8H8UpWaisRsh6LOhRnXRykn8FNZO0CLYoLRlOWWBTViBq0buaxCpyB5iR3WHSO7uWUGcmxOEg6c303sIA4G00qVkx4wRP');
-// const stripe = require('stripe')('sk_test_51Nmp0aDBoEL4nVgEyYWg4Hf1QPzcm4EmME8hO10R1UV5q7Hycc67W1VkbTppXTDJ5EMLDPI1K08IMxWVfPpVgM4L00e5Ra0Iuk');
+const stripe = require('stripe')('sk_test_51Nmp0aDBoEL4nVgEyYWg4Hf1QPzcm4EmME8hO10R1UV5q7Hycc67W1VkbTppXTDJ5EMLDPI1K08IMxWVfPpVgM4L00e5Ra0Iuk');
 
 // Test mode
-const stripe = require('stripe')('sk_test_51NlUc8H8UpWaisRsh6LOhRnXRykn8FNZO0CLYoLRlOWWBTViBq0buaxCpyB5iR3WHSO7uWUGcmxOEg6c303sIA4G00qVkx4wRP');
+// const stripe = require('stripe')('sk_test_51NlUc8H8UpWaisRsh6LOhRnXRykn8FNZO0CLYoLRlOWWBTViBq0buaxCpyB5iR3WHSO7uWUGcmxOEg6c303sIA4G00qVkx4wRP');
 
 // Real Use
 // const stripe = require('stripe')('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');
@@ -21,11 +20,12 @@ const app = express();
 const YOUR_DOMAIN = 'http://localhost:3000/buy';
 // const YOUR_DOMAIN = 'http://talysis15.co.uk/buy';
 
-// const priceID = 'price_1Nmp4hDBoEL4nVgEsJyZtbEk';
-// const priceID = 'price_1Nmi9FH8UpWaisRscayjkLmi';
+
+const priceID = 'price_1Nmp4hDBoEL4nVgEsJyZtbEk';
+
 
 //Test Mode
-const priceID = 'price_1Nmi9FH8UpWaisRscayjkLmi';
+// const priceID = 'price_1Nmi9FH8UpWaisRscayjkLmi';
 
 // Real Use
 // const priceID = 'price_1NnQz7H8UpWaisRsFFvk6vdj';
@@ -50,9 +50,10 @@ const handleDownload = async (historyData) => {
         let person = "";
         k++;
         const id = k;
+        const email = historyData[i]['email'];
         const blocks = historyData[i]['blocks'];
         const date = historyData[i]['date'];
-        person = '{"id":"'+id+'", "blocks":"'+blocks+'", "date":"'+date+'"}';
+        person = '{"id":"'+id+'", "email":"'+email+'", "blocks":"'+blocks+'", "date":"'+date+'"}';
         persons.push(JSON.parse(person));
     }
     // console.log('person', persons);
@@ -61,7 +62,7 @@ const handleDownload = async (historyData) => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-    XLSX.writeFile(workbook, "../../output.xlsx");
+    XLSX.writeFile(workbook, "../../output"+k+".xlsx");
 }
 
 app.get('/create-checkout-session', async (req, res) => {

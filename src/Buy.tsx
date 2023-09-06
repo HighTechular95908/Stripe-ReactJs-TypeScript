@@ -3,11 +3,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import * as XLSX from 'xlsx';
 import Header from "./Header";
 
-// const stripePromise = loadStripe("pk_test_51Nmp0aDBoEL4nVgEnrD0xLQwFXk9aT9KGYs9OryMQ2xlzkH5iSn5TW0IQzvL6bfGw6yhnPZh6fHYI0t77wvt2jiy003GvCPNxm");
-// const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
+const stripePromise = loadStripe("pk_test_51Nmp0aDBoEL4nVgEnrD0xLQwFXk9aT9KGYs9OryMQ2xlzkH5iSn5TW0IQzvL6bfGw6yhnPZh6fHYI0t77wvt2jiy003GvCPNxm");
 
 //Test Mode
-const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
+// const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
 
 //Real Use
 // const stripePromise = loadStripe("pk_live_51NlUc8H8UpWaisRstn5EhQBorzvy4vIqWC4OGdWGYki2Chv3uYERgc6Yogx4D7bcTzJaZqspjgpcu5xSYM5POFpF003miUCpzF");
