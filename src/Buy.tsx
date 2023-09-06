@@ -5,8 +5,8 @@ import Header from "./Header";
 const stripePromise = loadStripe("pk_test_51NlUc8H8UpWaisRsvYmEJl6uyJWmzRFINvGclxMvZAF1lbfUqU4Vxp8VpDgIsLXcz4JbSZhA8ZdEj7z7Qv8nx2dR00U9CPna2e");
 // const stripePromise = loadStripe("pk_test_51Nmp0aDBoEL4nVgEnrD0xLQwFXk9aT9KGYs9OryMQ2xlzkH5iSn5TW0IQzvL6bfGw6yhnPZh6fHYI0t77wvt2jiy003GvCPNxm");
 // const stripePromise = loadStripe("pk_test_GT6R5LabiNRdqHGN4Xu7Xwmw");
-// const API_URL = "http://localhost:4242/";
-const API_URL = "http://talysis15.co.uk:4242/";
+const API_URL = "http://localhost:4242/";
+// const API_URL = "http://talysis15.co.uk:4242/";
 
 const blocks:any[] = [];
 for (let i = 0; i < 55 * 105; i++) { // Total blocks: 5775

@@ -12,8 +12,8 @@ const Block = require('./models/Blocks');
 
 
 const app = express();
-// const YOUR_DOMAIN = 'http://localhost:3000/buy';
-const YOUR_DOMAIN = 'http://talysis15.co.uk/buy';
+const YOUR_DOMAIN = 'http://localhost:3000/buy';
+// const YOUR_DOMAIN = 'http://talysis15.co.uk/buy';
 const endpointSecret = 'whsec_...';
 // const priceID = 'price_1Nmp4hDBoEL4nVgEsJyZtbEk';
 const priceID = 'price_1Nmi9FH8UpWaisRscayjkLmi';
