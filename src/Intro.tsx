@@ -118,7 +118,7 @@ function Intro() {
           </div>
           <div style={{ textAlign: 'center', margin: '50px' }}>
             <h2 style={{ textAlign: 'center', fontSize: '50px', color: '#DAA520' }}>Contact us</h2>
-            <a href="https://www.talysis.co.uk" target="_blank" rel="noopener noreferrer"><img src="logo2.png" width="200" height="200" alt="logo 2" /></a>
+            <a href="https://www.talysis.co.uk" target="_blank" rel="noopener noreferrer"><img src="logo3.png" width="200" height="200" alt="logo 2" /></a>
           </div>
         </div>
       </section>

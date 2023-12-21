@@ -81,19 +81,43 @@ body {
 #buyBtn{
   padding: 10px 20px; 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
-  background-color: #816c32; 
-  border: 2px solid #DAA520; 
+  /* background-color: #816c32;  */
+  background-color: red;
+  border: 2px solid #ffffff; 
   border-radius: 20px; 
   font-size: 50px; 
-  color: #FFD700;
+  color: #ffffff;
   cursor: pointer;
   text-decoration: none;
 }
 
 #buyBtn:hover{
   
-  background-color: #493d1d; 
-  color: #DAA520;
+  background-color: #8c2c19; 
+  color: #ffffff;
+  
+}
+
+#newBuyBtn{
+  position: absolute;
+  padding: 0.5vw 1vw; 
+  top:19vw;
+  right: 25vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  background-color: #876812; 
+  /* background-color: red; */
+  border: 2px solid #ffffff; 
+  border-radius: 1vw; 
+  font-size: 2.5vw; 
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#newBuyBtn:hover{
+  
+  background-color: #584616; 
+  color: #ffffff;
   
 }
 
@@ -106,8 +130,8 @@ body {
 /****************************************/
 
 .block {
-  width: calc(100% / 105);
-  height: calc(100vh / 65); /* Adjusted height to fit the screen */
+  width: calc(100% * 0.805 / 105);
+  height: calc(800px * 0.54 / 55); /* Adjusted height to fit the screen */
   border: 0.2px dotted #ddd;
   background-color: transparent;
   margin: 0; /* Removed margin */
@@ -173,12 +197,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: 67.5%;
-  overflow-y: hidden;
-  margin-top: 6.5%;
-  margin-bottom: 50%;
-  margin-right: 2.5%;
-  margin-left: 6.8%;
+  width: calc(1280px * 0.86);
+  height: calc(800px * 0.678);
+  /* height: 67.5%; */
+  /* overflow-y: hidden; */
+  margin-top: 6.2%;
+  /* margin-bottom: 50%; */
+  /* margin-right: 2.5%; */
+  margin-left: 6.1%;
   
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -186,17 +212,18 @@ body {
 #land {
   background-image: url('../public/back2.JPG');
   background-size: cover;
-  width: 1200px;
-  height: 800px;
+  width: calc(1280px * 1);
+  height: calc(800px * 1);
   margin: 0 auto;
-  overflow-y: hidden;
+  padding-top: 0.1px;
+  /* overflow-y: hidden; */
   /* overflow-x: auto; */
 }
 
 #summary {
   display: flex;
   justify-content: space-around;
-  width: 75%;
+  width: 50%;
   padding: 20px;
   font-size: 30px;
   margin: 0 auto;

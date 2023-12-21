@@ -1,4 +1,0 @@
-{
-  "jwtSecret": "mysecretkey",
-  "jwtExpiresIn": "1h"
-}
